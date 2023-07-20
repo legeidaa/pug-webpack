@@ -1,0 +1,25 @@
+{
+  "name": "pug-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "postcss-loader": "^7.3.3",
+    "postcss-preset-env": "^9.0.0",
+    "pug-plugin": "^4.9.8",
+    "sass": "^1.64.0",
+    "sass-loader": "^13.3.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

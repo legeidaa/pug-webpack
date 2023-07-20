@@ -1,0 +1,19 @@
+doctype html
+
+html(lang="ru")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        script(src="https://cdn.web.money/layout/v2/webmoney-header.js" type="text/javascript")
+        script(src="https://cdn.web.money/layout/v2/webmoney-footer.js" type="text/javascript")
+        link(href=require('../../scss/styles.scss') rel='stylesheet')
+    body 
+        div#webMoneyHeader
+
+        block content
+
+        div#webMoneyFooter
+
+    script(src=require('../../js/main.js') type='module')
