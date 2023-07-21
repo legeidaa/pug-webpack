@@ -1,4 +1,5 @@
 import './sdkInit'
+import './myfont.font'
 
 const mobileWidthMediaQuery = window.matchMedia('(max-width: 420px)')
 
@@ -13,3 +14,4 @@ printLog(mobileWidthMediaQuery.matches)
 mobileWidthMediaQuery.addEventListener('change', function(event) {
     printLog(event.matches)
 })
+

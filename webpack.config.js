@@ -1,5 +1,6 @@
 const path = require('path');
 const PugPlugin = require('pug-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const keepFoldersStructure = (pathData) => {
     const filepath = path
@@ -7,7 +8,7 @@ const keepFoldersStructure = (pathData) => {
         .split("/")
         .slice(1)
         .join("/");
-    return `${filepath}/[name].[hash][ext][query]`;
+    return `${filepath}/[name].[contenthash:8][ext][query]`;
 }
 
 const postCss = {
@@ -41,7 +42,8 @@ const config = {
             js: {
                 filename: 'js/[name].[contenthash:8].js',
             },
-        })
+        }),
+        new CleanWebpackPlugin(),
     ],
     module: {
         rules: [{
@@ -64,13 +66,13 @@ const config = {
                 }
             },
             {
-                //TODO добавить поддежку svg
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
+                // include: /fonts/,
                 generator: {
-                    filename: 'fonts/[name][ext][query]'
-                }
-            }
+                    filename: keepFoldersStructure
+                },
+            },
         ]
     },
     devServer: {
