@@ -10,6 +10,19 @@ const keepFoldersStructure = (pathData) => {
     return `${filepath}/[name].[hash][ext][query]`;
 }
 
+const postCss = {
+    loader: "postcss-loader",
+    options: {
+        postcssOptions: {
+            plugins: [
+                [
+                    "postcss-preset-env",
+                ],
+            ],
+        },
+    }
+}
+
 const config = {
     mode: 'development',
     entry: {
@@ -37,7 +50,11 @@ const config = {
             },
             {
                 test: /\.(css|sass|scss)$/,
-                use: ['css-loader', 'postcss-loader', 'sass-loader']
+                use: [
+                    'css-loader',
+                    postCss, // replace with 'postcss-loader' if you don't want to use autoprefixer
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.(png|jpg|jpeg|ico|webp|svg)/,
@@ -72,7 +89,7 @@ const config = {
 
 module.exports = (env, argv) => {
     if (argv.mode === 'development') {
-        //для дебага в браузере
+        //for debug in browser sources
         config.devtool = 'source-map';
     }
     return config
