@@ -1,10 +1,10 @@
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1689939021783'); /* IE9*/
-  src: url('iconfont.eot?t=1689939021783#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url("iconfont.woff2?t=1689939021783") format("woff2"),
-  url("iconfont.woff?t=1689939021783") format("woff"),
-  url('iconfont.ttf?t=1689939021783') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1689939021783#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1689945296333'); /* IE9*/
+  src: url('iconfont.eot?t=1689945296333#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("iconfont.woff2?t=1689945296333") format("woff2"),
+  url("iconfont.woff?t=1689945296333") format("woff"),
+  url('iconfont.ttf?t=1689945296333') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1689945296333#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 [class^="iconfont-"], [class*=" iconfont-"] {
@@ -16,6 +16,8 @@
 }
 
 .iconfont-wm_ic_24_arrow_right:before { content: "\ea01"; }
+.iconfont-wm_ic_24_eye_open:before { content: "\ea02"; }
 
 $iconfont-wm_ic_24_arrow_right: "\ea01";
+$iconfont-wm_ic_24_eye_open: "\ea02";
 

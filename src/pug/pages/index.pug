@@ -2,11 +2,44 @@ extends ../components/template.pug
 
 
 block content
-    h1 Pug template
+    h1 Example 
 
+
+    //- TODO 
+    //- svg, png sprites
+    //- images compression - https://www.npmjs.com/package/svgo-loader
+    //- localization
+    //- babel
+
+
+    //- Все пути нужно прописывать с require (особенности работы pug-plugin)
+    img(src=require('../../images/bg-p3.svg') width="100px")
+
+
+    //- SVG iconfont
+
+    //- 
+    //- Создается с помощью команды  npm run iconfont
+    //- Если не будет использоваться, можно удалить папку src/iconfont
+    //- 
+
+    //- Пример
     .iconfont-wm_ic_24_arrow_right
 
 
-    img(src=require('../../images/bg-p3.svg') width="100px")
-    img(src=require('../../images/icons/bg-p3.png') )
-    img(src=require('../../images/bg-p3.webp') )
+    //- SVG sprites
+
+    //- 
+    //- Создается с помощью команды  npm run iconsprite
+    //- Если не будет использоваться, можно удалить папку src/svgsprite
+    //- 
+
+    //-  Обязательно нужно импортировать спрайт как скрытое изображение, иначе работать не будет 
+    img(src=require('../../svgsprite/svg/sprite.css.svg') width="0" height="0" style="position: absolute; visibility: hidden")
+
+    //- Примеры
+    svg
+        use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_eye_open'))
+
+    svg
+        use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_arrow_right'))

@@ -6,8 +6,8 @@
     "scripts": {
         "serve": "webpack serve --mode=development",
         "build": "webpack --mode=production",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "font": "node svgtofont"
+        "iconfont": "node scripts/svgtofont",
+        "iconsprite": "svg-sprite --config scripts/svgtosprite.json src/images/icons/*.svg"
     },
     "keywords": [],
     "author": "",
@@ -20,6 +20,7 @@
         "pug-plugin": "^4.9.8",
         "sass": "^1.64.0",
         "sass-loader": "^13.3.2",
+        "svg-sprite": "^2.0.2",
         "svgtofont": "^3.25.4",
         "webpack": "^5.88.2",
         "webpack-cli": "^5.1.4",

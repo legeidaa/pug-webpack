@@ -8,8 +8,10 @@ const keepFoldersStructure = (pathData) => {
         .split("/")
         .slice(1)
         .join("/");
-    return `${filepath}/[name].[contenthash:8][ext][query]`;
+    return `${filepath}/[name].[contenthash:8][ext][fragment][query]`
+
 }
+
 
 const postCss = {
     loader: "postcss-loader",
@@ -25,7 +27,7 @@ const postCss = {
 }
 
 const config = {
-    mode: 'development',
+    // mode: 'development',
     entry: {
         index: './src/pug/pages/index.pug',
     },
@@ -68,7 +70,6 @@ const config = {
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
-                // include: /fonts/,
                 generator: {
                     filename: keepFoldersStructure
                 },

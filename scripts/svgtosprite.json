@@ -1,0 +1,15 @@
+{
+    "mode": {
+        "symbol": {
+            "example": false,
+            "inline": false,
+            "dest": "src/svgsprite",
+            "shape": {
+                "dimension": {
+                    "maxWidth": 24,
+                    "maxHeight": 24
+                }
+            }
+        }
+    }
+}
