@@ -65,7 +65,7 @@ function getConfig(lang, env, argv) {
                             }
                         }
                     }]
-    
+
                 },
                 {
                     test: /\.(css|sass|scss)$/,
@@ -79,7 +79,7 @@ function getConfig(lang, env, argv) {
                     test: /\.(png|jpg|jpeg|ico|webp|svg)/,
                     type: 'asset/resource',
                     generator: {
-                        filename:  keepFoldersStructure
+                        filename: keepFoldersStructure
                     }
                 },
                 {
@@ -89,6 +89,21 @@ function getConfig(lang, env, argv) {
                         filename: keepFoldersStructure
                     },
                 },
+                {
+                    test: /\.(?:js|mjs|cjs)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-env', { 
+                                    targets: "defaults" // "> 0.2% and not dead" для поддержки старых браузеров
+                                }]
+                            ]
+                        }
+                    }
+
+                }
             ]
         },
         devServer: {
