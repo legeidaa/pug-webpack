@@ -1,19 +1,40 @@
 extends ../components/template.pug
 
 
+block title 
+    //- 
+    -  var pageTitle = localeJson.firstpagename
+
+
+
 block content
-    h1 Example 
+    h1 #{localeJson.lang}
 
 
     //- TODO 
-    //- svg, png sprites
     //- images compression - https://www.npmjs.com/package/svgo-loader
-    //- localization
     //- babel
 
 
     //- Все пути нужно прописывать с require (особенности работы pug-plugin)
     img(src=require('../../images/bg-p3.svg') width="100px")
+
+
+
+
+
+
+    //- Локализация 
+
+    //- 
+    //- Переменные находятся в src/locales.json
+    //- В шаблонах pug используется объект localeJson
+    //- Список языков хранится в массиве в supportedLangs.js, он используется в сдк
+    //- Вебпак билдит только один язык за раз, поэтому нужно вручную указывать язык в module.exports в webpack.config.js
+
+
+
+
 
 
     //- SVG iconfont
@@ -25,6 +46,11 @@ block content
 
     //- Пример
     .iconfont-wm_ic_24_arrow_right
+
+
+
+
+
 
 
     //- SVG sprites
