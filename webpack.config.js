@@ -27,18 +27,34 @@ const postCss = {
     }
 }
 
-function getLocaleJson(lang) {
-    return require(`./src/locales/${lang}.json`)
+function getLangPaths() { 
+    let paths = {}
+
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        paths[lang] = `${lang}/`
+    }
+
+    return paths
 }
 
-function getConfig(lang, env, argv) {
+function getPages() {
+    let pages = {}
+
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        pages[`${lang}/index`] = `./src/pug/pages/first.pug?lang=${lang}`
+        pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
+    }
+
+    return pages
+}
+
+function getConfig(env, argv) {
     const config = {
-        entry: {
-            index: './src/pug/pages/first.pug',
-            second: './src/pug/pages/second.pug',
-        },
+        entry: getPages(),
         output: {
-            path: path.join(__dirname, `dist/${lang}/`),
+            path: path.join(__dirname, 'dist'),
             clean: true,
         },
         plugins: [
@@ -57,15 +73,10 @@ function getConfig(lang, env, argv) {
         module: {
             rules: [{
                     test: /\.pug$/,
-                    use: [{
-                        loader: PugPlugin.loader,
-                        options: {
-                            data: {
-                                localeJson: getLocaleJson(lang)
-                            }
-                        }
-                    }]
-    
+                    loader: PugPlugin.loader,
+                    options: {
+                        data: getLangPaths()
+                    }
                 },
                 {
                     test: /\.(css|sass|scss)$/,
@@ -93,7 +104,7 @@ function getConfig(lang, env, argv) {
         },
         devServer: {
             static: {
-                directory: path.join(__dirname, `dist/${lang}/`)
+                directory: path.join(__dirname, 'dist')
             },
             watchFiles: {
                 paths: ['src/**/*.*'],
@@ -112,8 +123,7 @@ function getConfig(lang, env, argv) {
 }
 
 
-
 // для смены языка нужно вречную сменить первый параметр в getConfig
 module.exports = (env, argv) => {
-    return getConfig('ru', env, argv)
+    return getConfig(env, argv)
 }
