@@ -1,4 +1,4 @@
-// import './sdkInit'
+import './sdkInit'
 
 const divElem = document.querySelector("body > div");
 

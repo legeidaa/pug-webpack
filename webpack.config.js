@@ -3,17 +3,6 @@ const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
 const supportedLangs = require('./src/js/supportedLangs')
 
-
-
-const keepFoldersStructure = (pathData) => {
-    const filepath = path
-        .dirname(pathData.filename)
-        .split("/")
-        .slice(1)
-        .join("/");
-    return `${filepath}/[name].[contenthash:8][ext][fragment][query]`
-
-}
 const postCss = {
     loader: "postcss-loader",
     options: {
@@ -27,27 +16,52 @@ const postCss = {
     }
 }
 
-function getLocaleJson(lang) {
-    return require(`./src/locales/${lang}.json`)
+function getLangPaths() {
+    let paths = {}
+
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        paths[lang] = `${lang}/`
+    }
+
+    return paths
 }
 
-function getConfig(lang, env, argv) {
+function getPages() {
+    let pages = {}
+
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        pages[`${lang}/index`] = `./src/pug/pages/first.pug?lang=${lang}`
+        pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
+    }
+
+    return pages
+}
+
+function getConfig(env, argv) {
     const config = {
-        entry: {
-            index: './src/pug/pages/first.pug',
-            second: './src/pug/pages/second.pug',
-        },
+        entry: getPages(),
         output: {
-            path: path.join(__dirname, `dist/${lang}/`),
+            path: path.join(__dirname, 'dist'),
             clean: true,
+            assetModuleFilename: (pathData) => {
+                const filepath = path
+                    .dirname(pathData.filename)
+                    .split("/")
+                    .slice(1)
+                    .join("/");
+                return `assets/${filepath}/[name].[contenthash:8][ext][fragment][query]`
+            },
+
         },
         plugins: [
             new PugPlugin({
                 css: {
-                    filename: 'css/[name].[contenthash:8].css'
+                    filename: 'assets/css/[name].[contenthash:8].css'
                 },
                 js: {
-                    filename: 'js/[name].[contenthash:8].js',
+                    filename: 'assets/js/[name].[contenthash:8].js',
                 },
             }),
             new webpack.DefinePlugin({
@@ -57,15 +71,10 @@ function getConfig(lang, env, argv) {
         module: {
             rules: [{
                     test: /\.pug$/,
-                    use: [{
-                        loader: PugPlugin.loader,
-                        options: {
-                            data: {
-                                localeJson: getLocaleJson(lang)
-                            }
-                        }
-                    }]
-
+                    loader: PugPlugin.loader,
+                    options: {
+                        data: getLangPaths()
+                    }
                 },
                 {
                     test: /\.(css|sass|scss)$/,
@@ -78,16 +87,10 @@ function getConfig(lang, env, argv) {
                 {
                     test: /\.(png|jpg|jpeg|ico|webp|svg)/,
                     type: 'asset/resource',
-                    generator: {
-                        filename: keepFoldersStructure
-                    }
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,
                     type: 'asset/resource',
-                    generator: {
-                        filename: keepFoldersStructure
-                    },
                 },
                 {
                     test: /\.(?:js|mjs|cjs)$/,
@@ -96,7 +99,7 @@ function getConfig(lang, env, argv) {
                         loader: 'babel-loader',
                         options: {
                             presets: [
-                                ['@babel/preset-env', { 
+                                ['@babel/preset-env', {
                                     targets: "defaults" // "> 0.2% and not dead" для поддержки старых браузеров
                                 }]
                             ]
@@ -108,7 +111,7 @@ function getConfig(lang, env, argv) {
         },
         devServer: {
             static: {
-                directory: path.join(__dirname, `dist/${lang}/`)
+                directory: path.join(__dirname, 'dist')
             },
             watchFiles: {
                 paths: ['src/**/*.*'],
@@ -127,8 +130,7 @@ function getConfig(lang, env, argv) {
 }
 
 
-
 // для смены языка нужно вречную сменить первый параметр в getConfig
 module.exports = (env, argv) => {
-    return getConfig('ru', env, argv)
+    return getConfig(env, argv)
 }

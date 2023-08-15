@@ -1,4 +1,4 @@
-import { SUPPORTED_LANGS, CURRENT_LANG } from './consts'
+import { CURRENT_LANG, SUPPORTED_LANGS } from './consts';
 const langJSON = require('../locales/' + CURRENT_LANG + '.json');
 // import langJSON from('../locales' + LANG + '.json') assert { type: 'json' };
 let webMoneyHeader = new WebMoneyHeader();
@@ -40,5 +40,7 @@ webMoneyFooter.init({
     rootElement: document.getElementById("webMoneyFooter"),
     lang: CURRENT_LANG,
     supportedLangs: SUPPORTED_LANGS,
-    onChangeLang: function(lang) {}
+    onChangeLang: function(lang) {
+        location.href = location.href.replace(`/${CURRENT_LANG}/`, `/${lang}/`);
+    }
 });
