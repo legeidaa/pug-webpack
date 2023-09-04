@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 const supportedLangs = require('./src/js/supportedLangs')
 
 const postCss = {
@@ -51,7 +52,7 @@ function getConfig(env, argv) {
                     .split("/")
                     .slice(1)
                     .join("/");
-                return `assets/${filepath}/[name].[contenthash:8][ext][fragment][query]`
+                return `assets/${filepath}/[name].[contenthash:8][ext][query]`
             },
 
         },
@@ -66,7 +67,13 @@ function getConfig(env, argv) {
             }),
             new webpack.DefinePlugin({
                 __SUPPORTED_LANGS__: JSON.stringify(supportedLangs)
-            })
+            }),
+            new CopyPlugin({
+                patterns: [
+                    { from: "src/index.html", to: "" },
+                ],
+            }),
+
         ],
         module: {
             rules: [{
@@ -85,7 +92,7 @@ function getConfig(env, argv) {
                     ]
                 },
                 {
-                    test: /\.(png|jpg|jpeg|ico|webp|svg)/,
+                    test: /\.(png|jpg|jpeg|ico|webp|svg|mp4)/,
                     type: 'asset/resource',
                 },
                 {

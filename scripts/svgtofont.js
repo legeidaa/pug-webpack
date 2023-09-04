@@ -2,7 +2,7 @@ const svgtofont = require('svgtofont');
 const path = require('path');
 const { unlink } = require('node:fs/promises')
 
-const srcPath = path.resolve(process.cwd(), './src/images/icons/')
+const srcPath = path.resolve(process.cwd(), './src/images/iconfont/')
 const distPath = path.resolve(process.cwd(), './src/iconfont/')
 const fontName = 'iconfont'
 
