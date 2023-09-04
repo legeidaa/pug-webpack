@@ -7,7 +7,7 @@
         "serve": "webpack serve --mode=development",
         "build": "webpack --mode=production",
         "iconfont": "node scripts/svgtofont",
-        "iconsprite": "svg-sprite --config scripts/svgtosprite.json src/images/icons/*.svg"
+        "svgsprite": "svg-sprite --config scripts/svgsprite.json src/images/icons/*.svg"
     },
     "keywords": [],
     "author": "",

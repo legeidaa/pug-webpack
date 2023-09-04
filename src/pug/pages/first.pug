@@ -6,65 +6,61 @@ block title
     -   var pageTitle = t`firstpagename`
 
 block content
-    h1 #{t`lang`}
+    .container 
+        
+        h1 #{t`lang`}
 
 
-    //- TODO 
-    //- images compression - https://www.npmjs.com/package/svgo-loader
-    //- babel
-
-
-    //- Все пути нужно прописывать с require (особенности работы pug-plugin)
-    img(src=require('../../images/bg-p3.svg') width="100px")
+        //- Все пути нужно прописывать с require (особенности работы pug-plugin)
+        img(src=require('../../images/image-example.webp') width="100px")
 
 
 
 
+        //- Локализация 
 
-
-    //- Локализация 
-
-    //- 
-    //- Переменные находятся в src/locales.json
-    //- В шаблонах pug используется объект localeJson
-    //- Список языков хранится в массиве в supportedLangs.js, он используется в сдк
-    //- Вебпак билдит только один язык за раз, поэтому нужно вручную указывать язык в module.exports в webpack.config.js
+        //- 
+        //- Переменные находятся в src/locales.json
+        //- Список языков хранится в массиве в supportedLangs.js, он используется в сдк
+        //- 
 
 
 
 
 
+        //- SVG iconfont
 
-    //- SVG iconfont
+        //- 
+        //- Создается с помощью команды  npm run iconfont
+        //- Если не будет использоваться, можно удалить папку src/iconfont
+        //- 
 
-    //- 
-    //- Создается с помощью команды  npm run iconfont
-    //- Если не будет использоваться, можно удалить папку src/iconfont
-    //- 
-
-    //- Пример
-    .iconfont-wm_ic_24_arrow_right
-
+        //- Пример
+        .iconfont-wm_ic_24_arrow_right
 
 
 
 
+        //- SVG sprites
 
+        //- https://www.npmjs.com/package/svg-sprite (режим и настройки изменяются в scripts/svgtosprite  )
+        //- Создается с помощью команды  npm run svgsprite
+        //- Берет картинки из папки images/icons
+        //- Примеры использования в svgsprite/sprite.symbol.html (в билд не попадает), в этой же папке лежит сгенерированный спрайт
+        //- Если требуется изменить цвет с помощью css, нужно убрать атрибуты fill из исходной картинки
+        //- Если не будет использоваться, можно удалить папку src/svgsprite
+        //- 
 
-    //- SVG sprites
+        //- Примеры
+        svg#svg
+            use(href=require('/src/svgsprite/sprite.svg#icon-example-1'))
 
-    //- 
-    //- Создается с помощью команды  npm run iconsprite
-    //- Берет картинки из папки icons
-    //- Если не будет использоваться, можно удалить папку src/svgsprite
-    //- 
+        style(type="text/css").
+            #svg {
+                fill: red;
+            }
+        
+        svg
+            use(href=require('/src/svgsprite/sprite.svg#icon-example-2'))
 
-    //-  Обязательно нужно импортировать спрайт как скрытое изображение, иначе работать не будет 
-    //- img(src=require('../../svgsprite/svg/sprite.css.svg') width="0" height="0" style="position: absolute; visibility: hidden")
-
-    //- Примеры
-    svg
-        use(href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_eye_open'))
-
-    //- svg
-    //-     use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_arrow_right')) 
+    
