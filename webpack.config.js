@@ -52,7 +52,7 @@ function getConfig(env, argv) {
                     .split("/")
                     .slice(1)
                     .join("/");
-                return `assets/${filepath}/[name].[contenthash:8][ext][query]`
+                return `assets/${filepath}/[name].[hash:8][ext][fragment][query]`
             },
 
         },
@@ -72,7 +72,7 @@ function getConfig(env, argv) {
                 patterns: [
                     { from: "src/index.html", to: "" },
                 ],
-            }),
+            })
 
         ],
         module: {
@@ -94,6 +94,7 @@ function getConfig(env, argv) {
                 {
                     test: /\.(png|jpg|jpeg|ico|webp|svg|mp4)/,
                     type: 'asset/resource',
+                    
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,

@@ -3,9 +3,7 @@ extends ../components/template.pug
 
 block title 
     //- 
-    -  var pageTitle = t`firstpagename`
-
-
+    -   var pageTitle = t`firstpagename`
 
 block content
     h1 #{t`lang`}
@@ -62,11 +60,11 @@ block content
     //- 
 
     //-  Обязательно нужно импортировать спрайт как скрытое изображение, иначе работать не будет 
-    img(src=require('../../svgsprite/svg/sprite.css.svg') width="0" height="0" style="position: absolute; visibility: hidden")
+    //- img(src=require('../../svgsprite/svg/sprite.css.svg') width="0" height="0" style="position: absolute; visibility: hidden")
 
     //- Примеры
     svg
-        use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_eye_open'))
+        use(href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_eye_open'))
 
-    svg
-        use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_arrow_right'))
+    //- svg
+    //-     use(xlink:href=require('../../svgsprite/svg/sprite.css.svg#wm_ic_24_arrow_right')) 
