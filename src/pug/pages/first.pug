@@ -10,11 +10,18 @@ block content
         
         h1 #{t`lang`}
 
+        //- TODO
+
+        //- iconfont
+        //- redirect from index page
+        //- pug localization docs 
+        //- update packages
+        //- 
+
+
 
         //- Все пути нужно прописывать с require (особенности работы pug-plugin)
         img(src=require('../../images/image-example.webp') width="100px")
-
-
 
 
         //- Локализация 
@@ -25,20 +32,17 @@ block content
         //- 
 
 
-
-
-
         //- SVG iconfont
 
         //- 
+        //- https://www.npmjs.com/package/svgtofont
         //- Создается с помощью команды  npm run iconfont
+        //- Берет картинки из папки images/icons
         //- Если не будет использоваться, можно удалить папку src/iconfont
         //- 
-
         //- Пример
-        .iconfont-wm_ic_24_arrow_right
-
-
+        .iconfont-icon-example-1
+        .iconfont-icon-example-2
 
 
         //- SVG sprites
@@ -50,7 +54,6 @@ block content
         //- Если требуется изменить цвет с помощью css, нужно убрать атрибуты fill из исходной картинки
         //- Если не будет использоваться, можно удалить папку src/svgsprite
         //- 
-
         //- Примеры
         svg#svg
             use(href=require('/src/svgsprite/sprite.svg#icon-example-1'))
