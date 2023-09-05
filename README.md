@@ -82,3 +82,6 @@ svg
 ## Postcss
 
 Изменить [настройки](https://webpack.js.org/loaders/postcss-loader/) можно в объекте postCss в webpack.config.js   
+
+## ***
+При сохранении модуля, подключенного к main.js (или другого скрипта, подключенного в pug), валятся ошибки. Чтобы они исчезли, нужно пересохранить main.js

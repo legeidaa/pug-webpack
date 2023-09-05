@@ -25,6 +25,7 @@ webMoneyHeader.init({
     lang: CURRENT_LANG,
     serviceName: "ServiceName",
     rid: "DDACEB81-AD68-4C26-A3FD-AF030166963A",
+    maxWidth: "1312px",
     firstLevel: [
         addPage("firstpagename", '/' ),
         addPage("secondpagename", 'second.html' ),
@@ -40,6 +41,7 @@ webMoneyFooter.init({
     rootElement: document.getElementById("webMoneyFooter"),
     lang: CURRENT_LANG,
     supportedLangs: SUPPORTED_LANGS,
+    maxWidth: "1312px",
     onChangeLang: function(lang) {
         location.href = location.href.replace(`/${CURRENT_LANG}/`, `/${lang}/`);
     }
