@@ -27,6 +27,8 @@ block content
 div= t`string_from_locale_json`
 
 a(href=t`string_from_locale_json`) 
+
+span какой-то #{t`string_from_locale_json`} текст 
 ```
 
 json'ы с переводами расположены в папке src/locales   
@@ -48,6 +50,7 @@ wmds-reset - доработанный bootstrap reboot
 Используется пакет [svgtofont](https://github.com/jaywcjlove/svgtofont)   
 Запускается командой npm run iconfont   
 Генерируется из svg, расположенных в папке src/images/icons   
+Работает аналогично icomoon          
 Настраивается в scripts/svgtofont.js   
 Создает папку src/iconfont со шрифтами и css, если не будет использоваться, папку можно удалить   
 
@@ -56,7 +59,21 @@ wmds-reset - доработанный bootstrap reboot
 Запускается командой npm run svgsprite   
 Генерируется из svg, расположенных в папке src/images/icons    
 Настраивается в scripts/svgtofont.js, src можно поменять в package.json   
-Создает папку src/svgsprite со sprite.svg и html со всеми вариантами использования, если не будет использоваться, папку можно удалить    
+Создает папку src/svgsprite со sprite.svg и html со всеми вариантами использования, если не будет использоваться, папку можно удалить
+Если требуется изменить цвет с помощью css, нужно убрать атрибуты fill из исходной картинки   
+Пример:   
+```
+svg#svg
+    use(href=require('/src/svgsprite/sprite.svg#icon-example-1'))
+
+style(type="text/css").
+    #svg {
+        fill: red;
+    }
+
+svg
+    use(href=require('/src/svgsprite/sprite.svg#icon-example-2'))
+```
 
 ## Babel
 
