@@ -137,8 +137,6 @@ function getConfig(env, argv) {
     return config
 }
 
-
-// для смены языка нужно вречную сменить первый параметр в getConfig
 module.exports = (env, argv) => {
     return getConfig(env, argv)
 }
