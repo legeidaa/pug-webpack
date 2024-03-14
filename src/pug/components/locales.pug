@@ -1,33 +1,35 @@
 -
-  //- variable from URL query
-  lang = lang || 'ru'
+    //- variable from URL query
+    lang = lang || 'ru'
 
-  const i18next = require('i18next')
-  const supportedLangs = require('../../js/supportedLangs')
+    const i18next = require('i18next')
 
-  //- translate function
-  const t = (key) => i18next.t(key)
+    const supportedLangs = require('../../js/supportedLangs')
 
-  const getResources = () => {
-    let resources = {}
+    //- translate function
+    const t = (key) => i18next.t(key)
 
-    for (let i = 0; i < supportedLangs.length; i++) {
-      const lang = supportedLangs[i];
-      resources[lang] = {
-        translation: require(`../../locales/${lang}.json`)
-      }
+    const getResources = () => {
+        let resources = {}
+
+        for (let i = 0; i < supportedLangs.length; i++) {
+            const lang = supportedLangs[i];
+            resources[lang] = {
+                //- TODO заменить пути на алиасы
+                translation: require(`../../locales/${lang}.json`)
+            }
+        }
+
+        return resources
     }
 
-    return resources
-  }
+    //- initialize i18next
+    i18next.init({
+        lng: 'ru',
+        fallbackLng: 'ru',
+        supportedLngs: supportedLangs,
+        resources: getResources(),
+    });
 
-  //- initialize i18next
-  i18next.init({
-    lng: 'ru',
-    fallbackLng: 'ru',
-    supportedLngs: supportedLangs,
-    resources: getResources(),
-  });
-
-  //- set language
-  i18next.changeLanguage(lang)
+    //- set language
+    i18next.changeLanguage(lang)

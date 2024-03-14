@@ -1,6 +1,5 @@
 import { CURRENT_LANG, SUPPORTED_LANGS } from './consts';
 const langJSON = require('../locales/' + CURRENT_LANG + '.json');
-// import langJSON from('../locales' + LANG + '.json') assert { type: 'json' };
 let webMoneyHeader = new WebMoneyHeader();
 let webMoneyFooter = new WebMoneyFooter();
 const userData = { wmid: '' }

@@ -33,8 +33,8 @@ function getPages() {
 
     for (let i = 0; i < supportedLangs.length; i++) {
         const lang = supportedLangs[i];
-        pages[`${lang}/index`] = `./src/pug/pages/first.pug?lang=${lang}`
-        pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
+        pages[`${lang}/index`] = `./src/pug/pages/index.pug?lang=${lang}`
+        // pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
     }
 
     return pages
@@ -42,7 +42,7 @@ function getPages() {
 
 function getConfig(env, argv) {
     const config = {
-        entry: getPages(),
+        // entry: getPages(),
         output: {
             path: path.join(__dirname, 'dist'),
             clean: true,
@@ -58,16 +58,24 @@ function getConfig(env, argv) {
         },
         plugins: [
             new PugPlugin({
+                entry: getPages(),
+
+                preprocessorOptions: {
+                    basedir: path.join(__dirname, 'src/'),
+                },
                 css: {
                     filename: 'assets/css/[name].[contenthash:8].css'
                 },
                 js: {
                     filename: 'assets/js/[name].[contenthash:8].js',
                 },
+                data: getLangPaths()
             }),
+
             new webpack.DefinePlugin({
                 __SUPPORTED_LANGS__: JSON.stringify(supportedLangs)
             }),
+
             new CopyPlugin({
                 patterns: [
                     { from: "src/index.html", to: "" },
@@ -76,13 +84,14 @@ function getConfig(env, argv) {
 
         ],
         module: {
-            rules: [{
-                    test: /\.pug$/,
-                    loader: PugPlugin.loader,
-                    options: {
-                        data: getLangPaths()
-                    }
-                },
+            rules: [
+                // {
+                //     test: /\.pug$/,
+                //     loader: PugPlugin.loader,
+                //     options: {
+                //         data: getLangPaths()
+                //     }
+                // },
                 {
                     test: /\.(css|sass|scss)$/,
                     use: [
@@ -92,9 +101,9 @@ function getConfig(env, argv) {
                     ]
                 },
                 {
-                    test: /\.(png|jpg|jpeg|ico|webp|svg|mp4)/,
+                    test: /\.(png|jpg|jpeg|ico|webp|svg|mp4|webm|mov)/,
                     type: 'asset/resource',
-                    
+
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -128,6 +137,7 @@ function getConfig(env, argv) {
                 }
             }
         },
+
         stats: 'errors-only',
     }
 
