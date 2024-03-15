@@ -4,7 +4,7 @@
 
     const i18next = require('i18next')
 
-    const supportedLangs = require('../../js/supportedLangs')
+    const supportedLangs = require('@js/consts/supportedLangs')
 
     //- translate function
     const t = (key) => i18next.t(key)
@@ -16,7 +16,7 @@
             const lang = supportedLangs[i];
             resources[lang] = {
                 //- TODO заменить пути на алиасы
-                translation: require(`../../locales/${lang}.json`)
+                translation: require(`@locales/${lang}.json`)
             }
         }
 

@@ -64,7 +64,7 @@ wmds-reset - доработанный bootstrap reboot
 Пример:   
 ```
 svg#svg
-    use(href=require('/src/svgsprite/sprite.svg#icon-example-1'))
+    use(href='/src/svgsprite/sprite.svg#icon-example-1')
 
 style(type="text/css").
     #svg {
@@ -72,7 +72,7 @@ style(type="text/css").
     }
 
 svg
-    use(href=require('/src/svgsprite/sprite.svg#icon-example-2'))
+    use(href='/src/svgsprite/sprite.svg#icon-example-2')
 ```
 
 ## Babel
@@ -90,4 +90,5 @@ svg
 TODO
 Алиасы к src папке - https://nimblewebdeveloper.com/blog/absolute-alias-imports-in-javascript-vscode
 Починить импорты модулей в js
+Убрать из wmds-reset ссе переменные
  -->

@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
 const CopyPlugin = require("copy-webpack-plugin");
-const supportedLangs = require('./src/js/supportedLangs')
+const supportedLangs = require('./src/js/consts/supportedLangs.js')
 
 const postCss = {
     loader: "postcss-loader",
@@ -34,7 +34,7 @@ function getPages() {
     for (let i = 0; i < supportedLangs.length; i++) {
         const lang = supportedLangs[i];
         pages[`${lang}/index`] = `./src/pug/pages/index.pug?lang=${lang}`
-        // pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
+        pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
     }
 
     return pages
@@ -42,7 +42,6 @@ function getPages() {
 
 function getConfig(env, argv) {
     const config = {
-        // entry: getPages(),
         output: {
             path: path.join(__dirname, 'dist'),
             clean: true,
@@ -60,9 +59,9 @@ function getConfig(env, argv) {
             new PugPlugin({
                 entry: getPages(),
 
-                preprocessorOptions: {
-                    basedir: path.join(__dirname, 'src/'),
-                },
+                // preprocessorOptions: {
+                //     basedir: path.join(__dirname, '/src/'),
+                // },
                 css: {
                     filename: 'assets/css/[name].[contenthash:8].css'
                 },
@@ -85,13 +84,6 @@ function getConfig(env, argv) {
         ],
         module: {
             rules: [
-                // {
-                //     test: /\.pug$/,
-                //     loader: PugPlugin.loader,
-                //     options: {
-                //         data: getLangPaths()
-                //     }
-                // },
                 {
                     test: /\.(css|sass|scss)$/,
                     use: [
@@ -125,6 +117,15 @@ function getConfig(env, argv) {
 
                 }
             ]
+        },
+        resolve: {
+            alias: {
+                '@images': path.join(__dirname, './src/images/'),
+                '@scss': path.join(__dirname, './src/scss/'),
+                '@js': path.join(__dirname, './src/js/'),
+                '@locales': path.join(__dirname, './src/locales/'),
+                '@pug': path.join(__dirname, './src/pug/'),
+            },
         },
         devServer: {
             static: {
