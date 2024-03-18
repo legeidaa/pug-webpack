@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
-const CopyPlugin = require("copy-webpack-plugin");
 const supportedLangs = require('./src/js/consts/supportedLangs.js')
 
 const postCss = {
@@ -74,13 +73,6 @@ function getConfig(env, argv) {
             new webpack.DefinePlugin({
                 __SUPPORTED_LANGS__: JSON.stringify(supportedLangs)
             }),
-
-            new CopyPlugin({
-                patterns: [
-                    { from: "src/index.html", to: "" },
-                ],
-            })
-
         ],
         module: {
             rules: [

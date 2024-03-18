@@ -3,6 +3,7 @@
 ## О проекте
 
 Сборка для верстки на [pug](https://pugjs.org/api/getting-started.html). Используются [pug-plugin](https://github.com/webdiscus/pug-plugin), [webpack5](https://webpack.js.org/concepts/), SCSS.
+Минимальноя версия Node.js - 18.12.0
 
 ## Pug
 
