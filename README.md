@@ -89,7 +89,5 @@ svg
 
 <!-- 
 TODO
-Алиасы к src папке - https://nimblewebdeveloper.com/blog/absolute-alias-imports-in-javascript-vscode
-Починить импорты модулей в js
 Убрать из wmds-reset ссе переменные
  -->
