@@ -1,29 +1,33 @@
 {
     "name": "pug-webpack",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "serve": "webpack serve --mode=development",
         "build": "webpack --mode=production",
         "iconfont": "node scripts/svgtofont",
-        "iconsprite": "svg-sprite --config scripts/svgtosprite.json src/images/icons/*.svg"
+        "svgsprite": "svg-sprite --config scripts/svgsprite.json src/images/icons/*.svg"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "clean-webpack-plugin": "^4.0.0",
+        "@babel/core": "^7.22.9",
+        "@babel/preset-env": "^7.22.9",
+        "@babel/regjsgen": "^0.8.0",
+        "babel-loader": "^9.1.3",
         "css-loader": "^6.8.1",
-        "postcss-loader": "^7.3.3",
+        "i18next": "^23.10.1",
+        "postcss-loader": "^8.1.1",
         "postcss-preset-env": "^9.0.0",
-        "pug-plugin": "^4.9.8",
+        "pug-plugin": "^5.0.2",
         "sass": "^1.64.0",
-        "sass-loader": "^13.3.2",
+        "sass-loader": "^14.1.1",
         "svg-sprite": "^2.0.2",
-        "svgtofont": "^3.25.4",
-        "webpack": "^5.88.2",
+        "svgtofont": "^4.2.0",
+        "webpack": "^5.90.3",
         "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^4.15.1"
+        "webpack-dev-server": "^5.0.3"
     }
 }

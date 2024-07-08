@@ -1,0 +1,16 @@
+{
+    "dest": "src/svgsprite",
+    "shape": {
+        "dimension": {
+            "maxWidth": 24,
+            "maxHeight": 24
+        }
+    },
+    "mode": {
+        "symbol": {
+            "dest": "./",
+            "sprite": "sprite.svg",
+            "example": true
+        }
+    }
+}

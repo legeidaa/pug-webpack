@@ -1,0 +1,35 @@
+-
+    //- variable from URL query
+    lang = lang || 'ru'
+
+    const i18next = require('i18next')
+
+    const supportedLangs = require('@js/consts/supportedLangs')
+
+    //- translate function
+    const t = (key) => i18next.t(key)
+
+    const getResources = () => {
+        let resources = {}
+
+        for (let i = 0; i < supportedLangs.length; i++) {
+            const lang = supportedLangs[i];
+            resources[lang] = {
+                //- TODO заменить пути на алиасы
+                translation: require(`@locales/${lang}.json`)
+            }
+        }
+
+        return resources
+    }
+
+    //- initialize i18next
+    i18next.init({
+        lng: 'ru',
+        fallbackLng: 'ru',
+        supportedLngs: supportedLangs,
+        resources: getResources(),
+    });
+
+    //- set language
+    i18next.changeLanguage(lang)

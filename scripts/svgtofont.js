@@ -14,6 +14,12 @@ svgtofont({
     fontName: fontName,
     css: true,
     website: false,
+    startUnicode: 0xea01,
+    svgicons2svgfont: {
+        fontHeight: 1000,
+        normalize: true
+    },
+
 }).then(() => {
     filesToDelete.forEach(file => {
         unlink(distPath + '/' + fontName + file)

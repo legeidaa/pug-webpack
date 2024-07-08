@@ -1,14 +1,20 @@
+include ./locales
+
 doctype html
 
-html(lang="ru")
+html(lang=t`lang`)
+    
+    block title 
     head
+        title=pageTitle
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        link(rel='icon' href='@images/favicon.ico')
         script(src="https://cdn.web.money/layout/v2/webmoney-header.js" type="text/javascript")
         script(src="https://cdn.web.money/layout/v2/webmoney-footer.js" type="text/javascript")
-        link(href=require('../../scss/styles.scss') rel='stylesheet')
+        link(href='@scss/styles.scss' rel='stylesheet')
+
     body 
         div#webMoneyHeader
 
@@ -16,4 +22,5 @@ html(lang="ru")
 
         div#webMoneyFooter
 
-    script(src=require('../../js/main.js') type='module')
+    script(src='@js/lib/sdkInit.js' type='module')
+    script(src='@js/main.js' type='module')

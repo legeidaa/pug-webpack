@@ -1,0 +1,129 @@
+@mixin headline-bold  {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.25rem;
+    letter-spacing: 0.04rem;
+}
+
+@mixin headline2-bold {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+}
+
+@mixin headline2-semibold {
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    letter-spacing: 0.03rem;
+}
+
+@mixin title-bold {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+@mixin title-semibold {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+@mixin title-mobile {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+}
+
+@mixin body2 {
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    letter-spacing: 0.02rem;
+}
+
+@mixin body-bold {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@mixin body-semibold {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@mixin body-medium {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01rem;
+}
+
+@mixin body-regular {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.04rem;
+}
+
+@mixin footnote-bold {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin footnote-semibold {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin footnote-medium {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+@mixin footnote-regular {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin caption-bold {
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@mixin caption-semibold {
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@mixin caption-medium {
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@mixin caption-regular {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@mixin button {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@mixin button-small {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}

@@ -1,17 +1,7 @@
-const path = require('path');
-const PugPlugin = require('pug-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
-const keepFoldersStructure = (pathData) => {
-    const filepath = path
-        .dirname(pathData.filename)
-        .split("/")
-        .slice(1)
-        .join("/");
-    return `${filepath}/[name].[contenthash:8][ext][fragment][query]`
-
-}
-
+const path = require('path')
+const webpack = require('webpack')
+const PugPlugin = require('pug-plugin')
+const supportedLangs = require('./src/js/consts/supportedLangs.js')
 
 const postCss = {
     loader: "postcss-loader",
@@ -26,74 +16,130 @@ const postCss = {
     }
 }
 
-const config = {
-    // mode: 'development',
-    entry: {
-        index: './src/pug/pages/index.pug',
-    },
-    output: {
-        path: path.join(__dirname, 'dist/'),
-        publicPath: '',
-    },
-    plugins: [
-        new PugPlugin({
-            pretty: true,
-            css: {
-                filename: 'css/[name].[contenthash:8].css'
-            },
-            js: {
-                filename: 'js/[name].[contenthash:8].js',
-            },
-        }),
-        new CleanWebpackPlugin(),
-    ],
-    module: {
-        rules: [{
-                test: /\.pug$/,
-                loader: PugPlugin.loader
-            },
-            {
-                test: /\.(css|sass|scss)$/,
-                use: [
-                    'css-loader',
-                    postCss, // replace with 'postcss-loader' if you don't want to use autoprefixer
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.(png|jpg|jpeg|ico|webp|svg)/,
-                type: 'asset/resource',
-                generator: {
-                    filename: keepFoldersStructure
-                }
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: keepFoldersStructure
-                },
-            },
-        ]
-    },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist')
-        },
-        watchFiles: {
-            paths: ['src/**/*.*'],
-            options: {
-                usePolling: true
-            }
-        }
-    },
-    stats: 'errors-only'
-};
+function getLangPaths() {
+    let paths = {}
 
-module.exports = (env, argv) => {
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        paths[lang] = `${lang}/`
+    }
+
+    return paths
+}
+
+function getPages() {
+    let pages = {}
+
+    for (let i = 0; i < supportedLangs.length; i++) {
+        const lang = supportedLangs[i];
+        pages[`${lang}/index`] = `./src/pug/pages/index.pug?lang=${lang}`
+        pages[`${lang}/second`] = `./src/pug/pages/second.pug?lang=${lang}`
+    }
+
+    return pages
+}
+
+function getConfig(env, argv) {
+    const config = {
+        output: {
+            path: path.join(__dirname, 'dist'),
+            clean: true,
+            assetModuleFilename: (pathData) => {
+                const filepath = path
+                    .dirname(pathData.filename)
+                    .split("/")
+                    .slice(1)
+                    .join("/");
+                return `assets/${filepath}/[name].[hash:8][ext][fragment][query]`
+            },
+
+        },
+        plugins: [
+            new PugPlugin({
+                entry: getPages(),
+
+                // preprocessorOptions: {
+                //     basedir: path.join(__dirname, '/src/'),
+                // },
+                css: {
+                    filename: 'assets/css/[name].[contenthash:8].css'
+                },
+                js: {
+                    filename: 'assets/js/[name].[contenthash:8].js',
+                },
+                data: getLangPaths()
+            }),
+
+            new webpack.DefinePlugin({
+                __SUPPORTED_LANGS__: JSON.stringify(supportedLangs)
+            }),
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.(css|sass|scss)$/,
+                    use: [
+                        'css-loader',
+                        postCss,
+                        'sass-loader'
+                    ]
+                },
+                {
+                    test: /\.(png|jpg|jpeg|ico|webp|svg|mp4|webm|mov)/,
+                    type: 'asset/resource',
+
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: 'asset/resource',
+                },
+                {
+                    test: /\.(?:js|mjs|cjs)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-env', {
+                                    targets: "defaults" // "> 0.2% and not dead" для поддержки старых браузеров
+                                }]
+                            ]
+                        }
+                    }
+
+                }
+            ]
+        },
+        resolve: {
+            alias: {
+                '@images': path.join(__dirname, './src/images/'),
+                '@scss': path.join(__dirname, './src/scss/'),
+                '@js': path.join(__dirname, './src/js/'),
+                '@locales': path.join(__dirname, './src/locales/'),
+                '@pug': path.join(__dirname, './src/pug/'),
+            },
+        },
+        devServer: {
+            static: {
+                directory: path.join(__dirname, 'dist')
+            },
+            watchFiles: {
+                paths: ['src/**/*.*'],
+                options: {
+                    usePolling: true
+                }
+            }
+        },
+
+        stats: 'errors-only',
+    }
+
     if (argv.mode === 'development') {
-        //for debug in browser sources
         config.devtool = 'source-map';
     }
     return config
+}
+
+module.exports = (env, argv) => {
+    return getConfig(env, argv)
 }
