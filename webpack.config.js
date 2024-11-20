@@ -58,9 +58,6 @@ function getConfig(env, argv) {
             new PugPlugin({
                 entry: getPages(),
 
-                // preprocessorOptions: {
-                //     basedir: path.join(__dirname, '/src/'),
-                // },
                 css: {
                     filename: 'assets/css/[name].[contenthash:8].css'
                 },
@@ -79,9 +76,17 @@ function getConfig(env, argv) {
                 {
                     test: /\.(css|sass|scss)$/,
                     use: [
-                        'css-loader',
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true,
+                            },
+                        },
                         postCss,
-                        'sass-loader'
+                        {
+                            loader: "sass-loader",
+                            options: { sassOptions: { sourceMapIncludeSources: true } }
+                        },
                     ]
                 },
                 {
