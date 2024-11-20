@@ -3,19 +3,6 @@ const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
 const supportedLangs = require('./src/js/consts/supportedLangs.js')
 
-const postCss = {
-    loader: "postcss-loader",
-    options: {
-        postcssOptions: {
-            plugins: [
-                [
-                    "postcss-preset-env",
-                ],
-            ],
-        },
-    }
-}
-
 function getLangPaths() {
     let paths = {}
 
@@ -56,8 +43,8 @@ function getConfig(env, argv) {
         },
         plugins: [
             new PugPlugin({
+                hotUpdate: true,
                 entry: getPages(),
-
                 css: {
                     filename: 'assets/css/[name].[contenthash:8].css'
                 },
@@ -82,10 +69,25 @@ function getConfig(env, argv) {
                                 sourceMap: true,
                             },
                         },
-                        postCss,
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        [
+                                            "postcss-preset-env",
+                                        ],
+                                    ],
+                                },
+                            }
+                        },
                         {
                             loader: "sass-loader",
-                            options: { sassOptions: { sourceMapIncludeSources: true } }
+                            options: {
+                                sassOptions: {
+                                    sourceMapIncludeSources: true
+                                }
+                            }
                         },
                     ]
                 },
