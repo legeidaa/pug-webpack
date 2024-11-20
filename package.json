@@ -28,7 +28,7 @@
         "sass": "^1.81.0",
         "sass-loader": "^16.0.3",
         "svg-sprite": "^2.0.4",
-        "svgtofont": "^4.2.0",
+        "svgtofont": "^6.1.1",
         "webpack": "^5.96.1",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.1.0"
