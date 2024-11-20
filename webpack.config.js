@@ -3,19 +3,6 @@ const webpack = require('webpack')
 const PugPlugin = require('pug-plugin')
 const supportedLangs = require('./src/js/consts/supportedLangs.js')
 
-const postCss = {
-    loader: "postcss-loader",
-    options: {
-        postcssOptions: {
-            plugins: [
-                [
-                    "postcss-preset-env",
-                ],
-            ],
-        },
-    }
-}
-
 function getLangPaths() {
     let paths = {}
 
@@ -56,11 +43,8 @@ function getConfig(env, argv) {
         },
         plugins: [
             new PugPlugin({
+                hotUpdate: true,
                 entry: getPages(),
-
-                // preprocessorOptions: {
-                //     basedir: path.join(__dirname, '/src/'),
-                // },
                 css: {
                     filename: 'assets/css/[name].[contenthash:8].css'
                 },
@@ -79,9 +63,32 @@ function getConfig(env, argv) {
                 {
                     test: /\.(css|sass|scss)$/,
                     use: [
-                        'css-loader',
-                        postCss,
-                        'sass-loader'
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true,
+                            },
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        [
+                                            "postcss-preset-env",
+                                        ],
+                                    ],
+                                },
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sassOptions: {
+                                    sourceMapIncludeSources: true
+                                }
+                            }
+                        },
                     ]
                 },
                 {

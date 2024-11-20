@@ -1,5 +1,5 @@
-@import '_vars.scss';
-@import '_mixins.scss';
+@use '_vars.scss';
+@use '_mixins.scss';
 
 *,
 *::before,
@@ -24,7 +24,7 @@ body {
 hr {
     margin: 0 0 0.75rem;
     border: 0;
-    border-top: 1px solid var(--#{$prefix}gray-200, #e5e7eb);
+    border-top: 1px solid var(--#{vars.$prefix}gray-200, #e5e7eb);
 }
 
 p {
@@ -62,7 +62,7 @@ small {
 
 mark {
     padding: 0.1875em;
-    background-color: var(--#{$prefix}yellow-50, #FEFBE8);
+    background-color: var(--#{vars.$prefix}yellow-50, #FEFBE8);
     padding: 0.125rem;
     border-radius: 0.25rem;
 }
@@ -91,11 +91,11 @@ strong {
 a {
     text-decoration: none;
     outline: none;
-    color: var(--#{$prefix}blue-500, #0080D8);
-    transition: var(--#{$prefix}trans-dur, 0.25s);
+    color: var(--#{vars.$prefix}blue-500, #0080D8);
+    transition: var(--#{vars.$prefix}trans-dur, 0.25s);
 
     &:hover {
-        color: var(--#{$prefix}blue-600, #006CB3);
+        color: var(--#{vars.$prefix}blue-600, #006CB3);
     }
 
     &:focus {
@@ -104,7 +104,7 @@ a {
 
     &:focus-visible {
         border-radius: 0.125rem;
-        box-shadow: 0 0 0 2px var(--#{$prefix}blue-200, #99CCEF);
+        box-shadow: 0 0 0 2px var(--#{vars.$prefix}blue-200, #99CCEF);
     }
 }
 
@@ -114,7 +114,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--#{$prefix}gray-700, #384250);
+    color: var(--#{vars.$prefix}gray-700, #384250);
 }
 
 h1,
@@ -177,8 +177,8 @@ kbd {
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
     font-size: 0.875em;
-    color: var(--#{$prefix}gray-700, #384250);
-    background: var(--#{$prefix}gray-100, #f3f4f6);
+    color: var(--#{vars.$prefix}gray-700, #384250);
+    background: var(--#{vars.$prefix}gray-100, #f3f4f6);
 }
 
 kbd kbd {
@@ -203,7 +203,7 @@ table {
 
 caption {
     padding: 0.5rem 0;
-    color: var(--#{$prefix}gray-700, #384250);
+    color: var(--#{vars.$prefix}gray-700, #384250);
     text-align: left;
 }
 
@@ -228,7 +228,7 @@ button,
 select,
 optgroup,
 textarea {
-    border: 1px solid var(--#{$prefix}black, #000);
+    border: 1px solid var(--#{vars.$prefix}black, #000);
     margin: 0;
     font-family: inherit;
     font-size: inherit;
